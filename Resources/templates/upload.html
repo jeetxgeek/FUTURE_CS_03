@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure File Sharing System</title>
+    <style>
+        body { font-family: Arial; background: #f4f7fb; margin:0; padding:0; }
+        .container { width:450px; margin:80px auto; background:white; padding:25px; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.1); }
+        h2{text-align:center;color:#333;margin-bottom:15px;}
+        .section { margin-bottom:30px; padding:15px; background:#f9fbff; border-radius:8px; border:1px solid #e2e6ea; }
+        input[type="file"], input[type="text"] { width:100%; padding:10px; border:1px solid #ccd3df; border-radius:8px; margin-top:8px; font-size:14px; }
+        button { width:100%; padding:12px; margin-top:12px; background:#0066ff; color:white; border:none; border-radius:8px; cursor:pointer; font-size:15px; }
+        button:hover { background:#0053cc; }
+        .back-link { text-align:center; margin-bottom:15px; display:block; color:#0066ff; text-decoration:none; }
+        footer { text-align:center; margin-top:20px; color:#888; font-size:14px; }
+        .flash-message { background:#d4edda; color:#155724; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #c3e6cb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔐 Secure File Sharing System</h2>
+        <a href="/files" class="back-link">📂 View Uploaded Files</a>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Upload Section -->
+        <div class="section">
+            <h3>📤 Upload & Encrypt File</h3>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Upload & Encrypt</button>
+            </form>
+        </div>
+
+        <!-- Download Section -->
+        <div class="section">
+            <h3>📥 Download & Decrypt File</h3>
+            <input type="text" id="fname" placeholder="example.txt.enc" required>
+            <button onclick="downloadFile()">Download File</button>
+        </div>
+    </div>
+
+    <footer>© Future Interns – Secure File System Project</footer>
+
+    <script>
+        function downloadFile() {
+            const filename = document.getElementById("fname").value;
+            if(filename.trim()!=""){
+                window.location.href = "/download/"+filename;
+            }
+        }
+    </script>
+</body>
+</html>

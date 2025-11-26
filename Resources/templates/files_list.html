@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uploaded Files - Secure File System</title>
+    <style>
+        body { font-family: Arial; background: #f4f7fb; margin:0; padding:0; }
+        .container { width:700px; margin:50px auto; background:white; padding:25px; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.1); }
+        h2{text-align:center;color:#333;margin-bottom:20px;}
+        table { width:100%; border-collapse:collapse; }
+        th, td { padding:12px; border-bottom:1px solid #ddd; text-align:left; }
+        th { background:#0066ff; color:white; border-radius:8px; }
+        tr:hover { background-color:#f1f1f1; }
+        .btn-download { padding:6px 12px; background:#28a745; color:white; border:none; border-radius:6px; cursor:pointer; text-decoration:none; font-size:14px; }
+        .btn-download:hover { background:#218838; }
+        .back-link { display:inline-block; margin-bottom:15px; color:#0066ff; text-decoration:none; }
+        .back-link:hover { text-decoration:underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📁 Uploaded Files</h2>
+        <a href="/" class="back-link">⬅ Back to Upload Page</a>
+
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>Action</th>
+            </tr>
+            {% for file in files %}
+            <tr>
+                <td>{{ file }}</td>
+                <td>
+                    <a href="/download/{{ file }}" class="btn-download">Download</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
